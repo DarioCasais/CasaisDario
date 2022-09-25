@@ -20,8 +20,7 @@ public class DebitoTest2 {
 	public void setUp() throws Exception {
 		cuenta = new Cuenta("20356298-33", "Garc�a Enrique");
 		cuenta.ingresar(2.0);
-		tarjeta_d = new Debito("123456", "Garc�a Enrique", new Date(
-				2018, 03, 26));
+		tarjeta_d = new Debito("123456", "Garc�a Enrique", new Date(2018, 03, 26));
 		tarjeta_d.setCuenta(cuenta);
 		
 		cuenta2 = new Cuenta("20356298-42", "Arias Facundo");
@@ -108,4 +107,18 @@ public class DebitoTest2 {
 		assertTrue(saldoAnterior==cuenta2.getSaldo(),"Fallo - Permitio pagar con la tarjeta de debito vencida");	
 	}
 	
+	//4to 
+	@Test
+	void pagoYRetiro () throws Exception {
+		double saldo = cuenta2.getSaldo();
+		System.out.println(saldo);
+		try {
+			tarjeta_d2.pagoEnEstablecimiento("Figuritas", 450);
+			tarjeta_d2.retirar(15000);//el metodo pago y retiro nunca apuntan al saldo de la cuenta
+			System.out.println(saldo);
+		} catch (Exception e)
+		{
+			assertTrue(saldo == cuenta2.getSaldo(), "NO HAY SALDO");
+		}
+	}
 }

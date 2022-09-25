@@ -107,14 +107,5 @@ public class CreditoTest {
 			fail("no se ingresan saldos negativos");
 		}
 	}
-	//5o test
-	@Test
-	void liquidarFuturo () throws Exception {
-		try {
-			credito.pagoEnEstablecimiento("Carga sube", 1500);
-			credito.liquidar(12, 2022);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 }
